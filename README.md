@@ -1,6 +1,7 @@
-
+### Developed by: DODDA JAYASRI
+### Register No: 212222240028
+### Date: 
 # Ex.No: 1B                     CONVERSION OF NON STATIONARY TO STATIONARY DATA
-# Date: 
 
 ### AIM:
 To perform regular differncing,seasonal adjustment and log transformatio on international airline passenger data
