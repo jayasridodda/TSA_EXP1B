@@ -4,7 +4,7 @@
 # Ex.No: 1B                     CONVERSION OF NON STATIONARY TO STATIONARY DATA
 
 ### AIM:
-To perform regular differncing,seasonal adjustment and log transformatio on international airline passenger data
+To perform regular differncing,seasonal adjustment and log transformatio on Salesforce stock history data
 ### ALGORITHM:
 1. Import the required packages like pandas and numpy
 2. Read the data using the pandas
@@ -19,11 +19,11 @@ import matplotlib.pyplot as plt
 from statsmodels.tsa.stattools import adfuller
 %matplotlib inline
 
-train = pd.read_csv("AirPassengers.csv")
-train.timestamp = pd.to_datetime(train.Month, format = '%Y-%m')
-train.drop('Month', axis=1, inplace = True)
-train.head()
-train['#Passengers'].plot()
+train = pd.read_csv("Salesforce_stock_history.csv")
+train.timestamp = pd.to_datetime(train.Date, format='%Y-%m-%d') 
+train.drop('Date', axis=1, inplace=True)
+print(train.head())
+train['Open'].plot()
 
 def adf_test(timeseries):
     print('Results of Dickey-Fuller Test:')
@@ -32,43 +32,43 @@ def adf_test(timeseries):
     for key, value in dftest[4].items():
         dfoutput['Critical Value (%s)' % key] = value
     print(dfoutput)
-adf_test(train['#Passengers'])
+adf_test(train['Open'])
+# Regular Differencing
+train['Open_diff'] = train['Open'] - train['Open'].shift(1)
+train['Open_diff'].dropna().plot()
 
-train['#Passengers_diff'] = train['#Passengers'] - train['#Passengers'].shift(1)
-train['#Passengers_diff'].dropna().plot()
 # Seasonal Differencing
 n=7
-train['#Passengers_diff'] = train['#Passengers'] - train['#Passengers'].shift(n)
-train['#Passengers_diff'].dropna().plot()
+train['Open_diff'] = train['Open'] - train['Open'].shift(n)
+train['Open_diff'].dropna().plot()
+
 # Transformation
-train['#Passengers_log'] = np.log(train['#Passengers'])
-train['#Passengers_log_diff'] = train['#Passengers_log'] - train['#Passengers_log'].shift(1)
-train['#Passengers_log_diff'].dropna().plot()
+train['Open_log'] = np.log(train['Open'])
+train['Open_log_diff'] = train['Open_log'] - train['Open_log'].shift(1)
+train['Open_log_diff'].dropna().plot()
 
 ```
 
 ### OUTPUT:
-![image](https://github.com/user-attachments/assets/94f68a80-e167-4508-afff-b42dac7f8939)
 
-![image](https://github.com/user-attachments/assets/bfa8e4ab-445d-43a2-8ec3-f74662de9af9)
+![image](https://github.com/user-attachments/assets/1c717994-84cb-4ba7-a375-60aa9e16b795)
+
 
 REGULAR DIFFERENCING:
 
-![image](https://github.com/user-attachments/assets/17857046-7bd7-44dc-9428-c1394de2f9c8)
+![image](https://github.com/user-attachments/assets/e106abcd-2218-44c9-8207-f24911192381)
 
 SEASONAL ADJUSTMENT:
 
-![image](https://github.com/user-attachments/assets/f762d90c-d979-429b-aff5-80b528bb17be)
+![image](https://github.com/user-attachments/assets/3cf65b2d-238a-423e-bab3-77aa85d06f66)
 
 LOG TRANSFORMATION:
 
-![image](https://github.com/user-attachments/assets/0602e303-2a10-4d7d-9ac9-bda95bfdd368)
+![image](https://github.com/user-attachments/assets/c8bb9916-f034-440f-a7c8-3b443e386659)
 
 ALL 3:
 
-![image](https://github.com/user-attachments/assets/d56961b3-175a-49c5-843a-cc4b4ce71ca3)
-
+![image](https://github.com/user-attachments/assets/96e116cd-2e8d-4a47-9ee0-63260720947f)
 
 ### RESULT:
-Thus we have created the python code for the conversion of non stationary to stationary data on international airline passenger
-data.
+Thus we have created the python code for the conversion of non stationary to stationary data on Salesforce stock history data.
