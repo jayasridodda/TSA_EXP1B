@@ -71,4 +71,4 @@ ALL 3:
 ![image](https://github.com/user-attachments/assets/96e116cd-2e8d-4a47-9ee0-63260720947f)
 
 ### RESULT:
-Thus we have created the python code for the conversion of non stationary to stationary data on Salesforce stock history data.
+Thus the python code for the conversion of non stationary to stationary data on Salesforce stock history data.
